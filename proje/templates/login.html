@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giriş Yap</title>
+    <link rel="stylesheet" href="../static/css/stil.css">
+</head>
+<body>
+    <h1>Giriş Yap</h1>
+    <div>
+        <form method="post">
+            <label>Kullanıcı Adı:</label><br>
+            <input type="text" name="username" required><br>
+            <label>Şifre:</label><br>
+            <input type="password" name="password" required><br><br>
+            <button type="submit">Giriş Yap</button>
+        </form>
+    </div>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <a href="/register">Hesabınız yok mu? Kayıt Ol</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ 'tr' if language == 'turkish' else 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ 'Sonuçlar' if language == 'turkish' else 'Results' }}</title>
+    <link rel="stylesheet" href="../static/css/stil.css">
+</head>
+<body>
+    <h1>{{ 'Analiz Sonuçları' if language == 'turkish' else 'Analysis Results' }}</h1>
+    
+    <!-- Tek metin analizi sonucu -->
+    {% if text %}
+        <p><strong>{{ 'Metin:' if language == 'turkish' else 'Text:' }}</strong> {{ text }}</p>
+        <p><strong>{{ 'Duygu:' if language == 'turkish' else 'Sentiment:' }}</strong> {{ sentiment }}</p>
+        <p><strong>{{ 'Güven Skoru:' if language == 'turkish' else 'Confidence Score:' }}</strong> {{ score }}</p>
+        <p>
+            {% if sentiment == 'Pozitif' %}
+                {{ 'Bu metin olumlu bir duygu içeriyor.' if language == 'turkish' else 'This text conveys a positive sentiment.' }}
+            {% elif sentiment == 'Negatif' %}
+                {{ 'Bu metin olumsuz bir duygu içeriyor.' if language == 'turkish' else 'This text conveys a negative sentiment.' }}
+            {% endif %}
+        </p>
+    {% endif %}
+    
+    <!-- Çoklu dosya analizi sonucu -->
+    {% if results %}
+        <h2>{{ 'Yüklenen Dosya Sonuçları' if language == 'turkish' else 'Uploaded File Results' }}</h2>
+        <ul>
+            {% for result in results %}
+                <li>
+                    <strong>{{ 'Metin:' if language == 'turkish' else 'Text:' }}</strong> {{ result.text }} | 
+                    <p><strong>{{ 'Duygu:' if language == 'turkish' else 'Sentiment:' }}</strong> {{ sentiment }}</p>
+                    <p><strong>{{ 'Güven Skoru:' if language == 'turkish' else 'Confidence Score:' }}</strong> {{ score }}</p>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <!-- Ana sayfaya dönüş linki -->
+    <a href="/">{{ 'Yeni bir metin analiz et' if language == 'turkish' else 'Analyze another text' }}</a>
+</body>
+</html>
+
+     

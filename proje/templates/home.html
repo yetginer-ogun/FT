@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ 'tr' if language == 'turkish' else 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ 'Ana Sayfa' if language == 'turkish' else 'Home' }}</title>
+    <link rel="stylesheet" href="../static/css/stil.css">
+</head>
+<body>
+    <h1>{{ 'Hoş Geldiniz' if language == 'turkish' else 'Welcome' }}</h1>
+    
+    <!-- Dil Seçim Formu -->
+    <div>
+        <form action="/change_language" method="post">
+            <label for="language">{{ 'Dil Seçiniz' if language == 'turkish' else 'Select Language' }}</label>
+            <select name="language" id="language">
+                <option value="turkish" {% if language == 'turkish' %}selected{% endif %}>Türkçe</option>
+                <option value="english" {% if language == 'english' %}selected{% endif %}>English</option>
+            </select>
+        </form>
+    </div>
+    <div>
+        <form action="/analyze" method="post">
+            <textarea name="text" placeholder="{{ 'Metninizi buraya girin...' if language == 'turkish' else 'Enter your text here...' }}" rows="4" cols="50"></textarea><br>
+            <button type="submit">{{ 'Analiz Et' if language == 'turkish' else 'Analyze' }}</button>
+        </form>
+    </div>
+    <h2>{{ 'Geçmiş' if language == 'turkish' else 'History' }}</h2>
+    <ul>
+        {% for item in history %}
+            <li><strong>{{ 'Metin' if language == 'turkish' else 'Text' }}:</strong> {{ item.text }} | 
+                <strong>{{ 'Duygu' if language == 'turkish' else 'Sentiment' }}:</strong> {{ item.sentiment }} | 
+                <strong>{{ 'Güven Skoru' if language == 'turkish' else 'Confidence Score' }}:</strong> {{ item.score }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/logout">{{ 'Çıkış Yap' if language == 'turkish' else 'Logout' }}</a>
+</body>
+</html>
